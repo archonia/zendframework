@@ -395,9 +395,11 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             }
         }
 
-        if (0 < count($args) && is_array($args[0])) {
+        if ($args && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
+        } else {
+            $extras = [];
         }
 
         $attributes = compact('rel', 'type', 'href', 'media', 'conditionalStylesheet', 'extras');
@@ -443,13 +445,15 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $type  = array_shift($args);
         $title = array_shift($args);
 
-        if (0 < count($args) && is_array($args[0])) {
+        if ($args && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
 
             if (isset($extras['media']) && is_array($extras['media'])) {
                 $extras['media'] = implode(',', $extras['media']);
             }
+        } else {
+            $extras = [];
         }
 
         $href  = (string) $href;
